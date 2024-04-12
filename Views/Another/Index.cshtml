@@ -1,0 +1,52 @@
+@model IEnumerable<NICO.ViewModel.ClientInfoViewModel>
+
+<div class="list-container">
+    <div class="list-heading">
+        <h1>List of People</h1>
+        <a href="another/anothercreate" class="button">
+            <span class="button__text">Add Item</span>
+            <span class="button__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
+                    <line y2="19" y1="5" x2="12" x1="12"></line>
+                    <line y2="12" y1="12" x2="19" x1="5"></line>
+                </svg>
+            </span>
+        </a>
+    </div>
+
+    <div class="card-deck">
+        @foreach(var item in Model){
+            <div class="card card-sm mb-3">
+           
+                <div class="card-body">
+                    <img src="" alt=""> 
+                     <p class="card-text name">@Html.DisplayFor(modelItem=> item.FistName) @Html.DisplayFor(modelItem=> item.MiddleName) @Html.DisplayFor(modelItem=> item.LastName)</p>
+                     <h5 class="card-title userType">@Html.DisplayFor(modelItem=> item.UserTypeName)</h5>
+                     
+                     <div class="inline-data">
+                       <p class="card-text">Age: <span>@Html.DisplayFor(modelItem=> item.Age)</span></p>
+                      <p class="card-text">Civil Status: <span>@Html.DisplayFor(modelItem=> item.CivilStatus)</span> </p>
+                    <p class="card-text">Religion: <span>@Html.DisplayFor(modelItem=> item.Religion)</span></p>
+                    <p class="card-text">Occupation: <span>@Html.DisplayFor(modelItem=> item.Occupation)</span></p>
+                      
+                    <p class="card-text address">Address: <span>@Html.DisplayFor(modelItem=> item.Address)</span></p>
+                     <p class="card-text ">Father: <span>@Html.DisplayFor(modelItem=> item.NameOfFather)</span></p>
+                     <p class="card-text ">Mother: <span>@Html.DisplayFor(modelItem=> item.NameOfMother)</span></p>
+
+                     </div>
+
+                    <div class="btn-group" role="group" aria-label="Actions">
+                        <a class="btn btn-warning updateBtn" href="another/update/@item.Id">Update</a>
+                        <a class="btn btn-danger deleteBTN" href="another/delete/@item.Id">X</a>
+                    </div>
+                </div>
+              
+            </div>
+  }
+    </div>
+
+
+    </tbody>
+</table>
+
+</div>

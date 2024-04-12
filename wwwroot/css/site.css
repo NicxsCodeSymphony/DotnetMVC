@@ -1,0 +1,257 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+.form-control{
+  width: 50vw;
+  margin-bottom: 20px;
+}
+
+.data-add {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.create-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.left {
+  grid-column: 1 / 2;
+}
+
+.right {
+  grid-column: 2 / 3;
+}
+
+/* Additional styling for better alignment */
+.create-form div {
+  margin-bottom: 10px;
+}
+
+.form-control{
+  width: 35vw;
+}
+
+.list-heading{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.navbar-nav{
+  margin-left: 60vw;
+}
+
+.nav-item{
+margin-left: 30px;
+}
+
+.list-container {
+  padding: 20px;
+}
+
+.list-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+ .card-deck {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+ .card {
+  width: calc(25% - 10px); /* Adjust as needed for smaller screens */
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-body {
+  padding: 20px;
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  margin-bottom: 1px;
+}
+
+.btn {
+  margin-right: 10px;
+}
+
+
+img {
+  width: 17vh;
+  height: 27vh;
+  border-radius: 2%;
+  border: 1px solid #34974d; /* Change border color here */
+  font-size: 50px;
+  object-fit: cover;
+}
+
+
+.name{
+  margin-top: 15px;
+  font-size: 20px;
+}
+
+.userType{
+  font-weight: 200;
+  font-style: italic;
+}
+
+.inline-data{
+  font-size: 12px;
+  position: relative;
+  right: 30px;
+}
+
+.address{
+  font-size: 12px;
+}
+
+.deleteBTN{
+  position: relative;
+  bottom: 47.5vh;
+  left: 2vw;
+}
+
+.updateBtn{
+  position: relative;
+  height: 30px;
+  top: 15px;
+  border: none;
+  border-radius: 0;
+  font-size: 12px;
+  width: 10vw;
+  background: #41cf65;
+}
+
+.address{
+  margin-top: 10px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #258cfb;
+}
+
+
+
+
+
+.button {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #34974d;
+  background-color: #3aa856;
+}
+
+.button, .button__icon, .button__text {
+  transition: all 0.3s;
+}
+
+.button .button__text {
+  transform: translateX(30px);
+  color: #fff;
+  font-weight: 600;
+}
+
+.button .button__icon {
+  position: absolute;
+  transform: translateX(109px);
+  height: 100%;
+  width: 39px;
+  background-color: #34974d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button .svg {
+  width: 30px;
+  stroke: #fff;
+}
+
+.button:hover {
+  background: #34974d;
+}
+
+.button:hover .button__text {
+  color: transparent;
+}
+
+.button:hover .button__icon {
+  width: 148px;
+  transform: translateX(0);
+}
+
+.button:active .button__icon {
+  background-color: #2e8644;
+}
+
+.button:active {
+  border: 1px solid #2e8644;
+}
+
+
+a{
+  text-decoration: none;
+}
+
+a:visited{
+  color: #fff;
+}

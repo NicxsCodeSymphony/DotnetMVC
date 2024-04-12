@@ -1,0 +1,18 @@
+@model List<NICO.Entities.UserType>
+
+<h1>
+    New UserType
+</h1>
+    
+
+<form action="Create" method="post">
+    <div>
+        <label>Type a UserType</label>
+        <input type="text" name="Name">
+    </div>
+
+    <div>
+        <input type="submit" class="btn btn-success" value="Submit">
+        @Html.ValidationMessageFor(model => model.First().Name, "", new {@class = "text-danger"})
+    </div>
+</form> 

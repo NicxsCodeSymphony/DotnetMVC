@@ -1,0 +1,2 @@
+dotnet ef dbcontext scaffold "Server=localhost;Database=Library;TrustServerCertificate=true;Trusted_Con
+nection=True" Microsoft.EntityFrameworkCore.SqlServer -o Entities -f

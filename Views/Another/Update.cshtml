@@ -1,0 +1,165 @@
+@model NICO.ViewModel.ClientInfoViewModel
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+
+<style>
+    .data-u {
+        display: flex;
+        flex-direction: column;
+        height: 90vh;
+        overflow: auto;
+        padding: 30px 200px;
+    }
+
+     h1{
+        margin-bottom: 20px;
+     }
+
+    .form {
+        width: 200%;
+        max-width: 1000px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .left {
+        width: 48%;
+    }
+
+    .right {
+        width: 48%;
+    }
+
+    .form-grid div {
+        margin-bottom: 10px;
+    }
+
+    .form-grid label {
+        display: block;
+        font-weight: bold;
+    }
+
+    .form-grid input,
+    .form-grid select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .text-danger {
+        color: red;
+    }
+</style>
+
+<div class="data-u">
+    
+ <h2>Update Data</h2>
+    <form asp-action="Update" class="form-grid">
+        <div class="form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id">
+        <div class="left">
+            <label asp-for="UserType"></label>
+            <select asp-for="UserType" class="form-control">
+        <option value="">Select User Type</option>
+        @foreach (var userType in ViewBag.UserTypes)
+        {
+            <option value="@userType.Id">@userType.Name</option>
+        }
+    </select>
+            <span asp-validation-for="UserType" class="text-danger"></span>
+
+            <label asp-for="FistName">First Name</label>
+            <input type="text" asp-for="FistName" class="form-control">
+            <span asp-validation-for="FistName" class="text-danger"></span>
+
+            <label asp-for="MiddleName"></label>
+            <input type="text" asp-for="MiddleName" class="form-control">
+            <span asp-validation-for="MiddleName" class="text-danger"></span>
+
+            <label asp-for="LastName"></label>
+            <input type="text" asp-for="LastName" class="form-control">
+            <span asp-validation-for="LastName" class="text-danger"></span>
+
+            <label asp-for="Address"></label>
+            <input type="text" asp-for="Address" class="form-control">
+            <span asp-validation-for="Address" class="text-danger"></span>
+
+            
+            <label asp-for="Religion"></label>
+            <input type="text" asp-for="Religion" class="form-control">
+            <span asp-validation-for="Religion" class="text-danger"></span>
+             <label asp-for="NameOfMother">Occupation</label>
+            <input type="text" asp-for="Occupation" class="form-control">
+            <span asp-validation-for="Occupation" class="text-danger"></span>
+        </div>
+
+        <div class="right">
+            <label asp-for="ZipCode"></label>
+            <input type="number" asp-for="ZipCode" class="form-control">
+            <span asp-validation-for="ZipCode" class="text-danger"></span>
+
+            <label asp-for="Birthdate"></label>
+            <input type="date" asp-for="Birthdate" class="form-control">
+            <span asp-validation-for="Birthdate" class="text-danger"></span>
+
+            <label asp-for="Age"></label>
+            <input type="number" asp-for="Age" readonly class="form-control">
+            <span asp-validation-for="Age" class="text-danger"></span>
+
+            <label asp-for="NameOfFather"></label>
+            <input type="text" asp-for="NameOfFather" class="form-control">
+            <span asp-validation-for="NameOfFather" class="text-danger"></span>
+
+            <label asp-for="NameOfMother"></label>
+            <input type="text" asp-for="NameOfMother" class="form-control">
+            <span asp-validation-for="NameOfMother" class="text-danger"></span>
+
+            <label asp-for="CivilStatus"></label>
+            <select name="CivilStatus" id="CivilStatus" asp-for="CivilStatus" class="form-control">
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Widow">Widow</option>
+                <option value="Separated">Separated</option>
+            </select>
+            <span asp-validation-for="CivilStatus" class="text-danger"></span>
+
+        </div>
+
+       
+         </div>
+         <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+    </form>
+   
+</div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function calculateAge() {
+            var today = new Date();
+            var birthdate = new Date(document.getElementById("Birthdate").value);
+            var age = today.getFullYear() - birthdate.getFullYear();
+            var monthDiff = today.getMonth() - birthdate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
+                age--;
+            }
+            document.getElementById("Age").value = age;
+        }
+
+        document.getElementById("Birthdate").addEventListener("change", calculateAge);
+    </script>
+
+}
