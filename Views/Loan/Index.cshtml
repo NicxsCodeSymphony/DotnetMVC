@@ -1,0 +1,49 @@
+@model IEnumerable<NICO.ViewModel.LoanViewModel>
+
+@* <a href="new/create">Add Data</a> *@
+
+<div class="list-heading">
+        <h1>List of Utanganan</h1>
+        <a href="loan/create" class="button">
+            <span class="button__text">Add Item</span>
+            <span class="button__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
+                    <line y2="19" y1="5" x2="12" x1="12"></line>
+                    <line y2="12" y1="12" x2="19" x1="5"></line>
+                </svg>
+            </span>
+        </a>
+    </div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Borrower</th>
+      <th scope="col">LoanPlan</th>
+      <th scope="col">Principal Loan</th>
+      <th scope="col">Interest</th>
+      <th scope="col">Date</th>
+      <th scope="col">Monthly</th>
+      <th scope="col">Total</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+ @foreach(var item in Model){
+           <tr>
+               <td>@Html.DisplayFor(modelItem => item.BorrowerName)</td>
+               <td>@Html.DisplayFor(modelItem => item.LoanPlan)</td>
+                <td>@Html.DisplayFor(modelItem => item.PrincipalLoan)</td>
+                 <td>@Html.DisplayFor(modelItem => item.Interest)</td>
+                  <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                   <td>@Html.DisplayFor(modelItem => item.Monthly)</td>
+                   <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                <td>
+                  <a class="btn btn-warning" href="loan/update/@item.Id">Update</a>
+                  <a class="btn btn-danger" href="loan/delete/@item.Id">Delete</a>
+                </td>
+           </tr>
+    }
+  </tbody>
+</table>

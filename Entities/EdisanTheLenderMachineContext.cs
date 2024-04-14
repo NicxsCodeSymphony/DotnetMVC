@@ -17,11 +17,13 @@ public partial class EdisanTheLenderMachineContext : DbContext
 
     public virtual DbSet<ClientInfo> ClientInfos { get; set; }
 
+    public virtual DbSet<Loan> Loans { get; set; }
+
     public virtual DbSet<UserType> UserTypes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost\\EDISANEXPRESS;Database=EdisanTheLenderMachine;TrustServerCertificate=true; Trusted_Connection=True");
+        => optionsBuilder.UseSqlServer("Server=localhost\\EDISANEXPRESS;Database=EdisanTheLenderMachine;TrustServerCertificate=true;Trusted_Connection=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -60,6 +62,24 @@ public partial class EdisanTheLenderMachineContext : DbContext
             entity.Property(e => e.Religion)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<Loan>(entity =>
+        {
+            entity.ToTable("Loan");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Borrower).HasColumnName("borrower")
+            .HasMaxLength(100)
+            .IsUnicode(false);
+            entity.Property(e => e.Date)
+                .HasColumnType("date")
+                .HasColumnName("date");
+            entity.Property(e => e.Interest).HasColumnName("interest");
+            entity.Property(e => e.LoanPlan).HasColumnName("loanPlan");
+            entity.Property(e => e.Monthly).HasColumnName("monthly");
+            entity.Property(e => e.PrincipalLoan).HasColumnName("principalLoan");
+            entity.Property(e => e.Total).HasColumnName("total");
         });
 
         modelBuilder.Entity<UserType>(entity =>
