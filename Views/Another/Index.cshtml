@@ -37,6 +37,7 @@
 
                     <div class="btn-group" role="group" aria-label="Actions">
                         <a class="btn btn-warning updateBtn" href="another/update/@item.Id">Update</a>
+                        <a class="btn btn-warning updateBtn loan-btn" href="@Url.Action("Loan", "Another", new { id = item.Id })">Loan</a>
                         <a class="btn btn-danger deleteBTN" href="another/delete/@item.Id">X</a>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -209,6 +210,10 @@ namespace NICO.Controllers
         private bool ClientInfoExists(int id)
         {
             return (_context.ClientInfos?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        public IActionResult Loan(int id){
+            return View(id);
         }
     }
 }
