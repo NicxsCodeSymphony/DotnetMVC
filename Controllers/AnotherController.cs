@@ -230,6 +230,7 @@ public async Task<IActionResult> Loan(int id)
             AmountPaid = loan.AmountPaid,
             InterestAmount = loan.InterestAmount,
             Total = loan.Total,
+            Status = loan.Status,
             Interest = loan.Interest,
             Deduction = loan.Deduction,
             ReceivableAmount = loan.ReceivableAmount,
