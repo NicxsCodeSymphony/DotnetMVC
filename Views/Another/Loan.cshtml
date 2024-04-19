@@ -1,10 +1,21 @@
 @model List<NICO.ViewModel.LoanViewModel>
 
-<h1>Loan Information</h1>
+    <style>
+        .card{width: 45vh;height: 40vh;padding: 30px;}
+        .card-heading{display: flex; justify-content: space-between;margin-bottom: 10px;}
+        .card-status{background-color: #eeee; padding: 5px; font-size: 14px; border-radius: 5px; font-weight: bold}
+        .money{margin-top: 20px;}
+        .next-payment{margin: 20px 0;}
+        .next-payment-heading{display: flex; justify-content: space-between;}
+    </style>
+
 <h1>Hello, @ViewBag.BorrowerId</h1>
+<hr>
+<p>Note: Kung Mangutang gali ka ayaw kalimot ug bayad ha</p>
 <br>
 <a class="btn btn-primary" href="@Url.Action("AddLoan", "Another", new { id = ViewBag.BorrowerId })">Add Loan</a>
 <br><br>
+
 
 @if (Model.Count == 0)
 {
@@ -12,46 +23,29 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Loan ID</th>
-                <th>Borrower</th>
-                <th>Amount</th>
-                <th>Term</th>
-                <th>Payment</th>
-                <th>Interest</th>
-                <th>Pay Amount</th>
-                <th>ReceivableAmount</th>
-                <th>Status</th>
-                <th>Due Date</th>
-                <th>Date Created</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var loan in Model)
-            {
-                <tr>
-                    <td>@loan.Id</td>
-                    <td>@loan.BorrowerName</td>
-                    <td>@loan.Amount</td>
-                    <td>@loan.Term</td>
-                    <td>@loan.Payment</td>
-                    <td>@loan.Interest</td>
-                    <td>@loan.AmountPaid</td>
-                    <td>@loan.Payment</td>
-                    <td>@loan.Status</td>
-                    <td>@loan.DueDate</td>
-                    <td>@loan.DateCreated</td>
-                    <td>@loan.Total</td>
-                    <td>
-                        <button class="btn btn-danger" onclick="deleteLoan(@loan.Id)">Delete</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="card-deck">
+        @foreach (var loan in Model)
+        {
+            <div class="card">
+                <div class="card-heading">
+                    <div></div>
+                    <div class="card-status">@loan.Status</div>
+                </div>
+                <div class="card-info"><h5>@loan.BorrowerName</h5>
+                <p>#@loan.Id 1233 <span style="font-weight: bolder; padding:0 3px">&#183;</span> @loan.DateCreated</p>
+                </div>
+                <div class="money"><h1>₱@loan.ReceivableAmount / <span style="color: #c0c0c0">₱@loan.Amount</span></h1></div>
+                <div class="next-payment">
+                    <div class="next-payment-heading">
+                        <div><h5>Next Payment</h5></div>
+                        <div class="next-payment-day">@loan.DueDate</div>
+                    </div>
+                    <h6>@loan.AmountPaid <span style="font-weight: bolder; padding:0 3px">&#183;</span> @loan.DueDate</h6>
+                </div>
+                <button class="btn btn-danger" onclick="deleteLoan(@loan.Id)">Delete</button>
+            </div>
+        }
+    </div>
 }
 
 @section Scripts {

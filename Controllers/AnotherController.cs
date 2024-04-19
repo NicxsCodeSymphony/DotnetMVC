@@ -272,7 +272,7 @@ public async Task<IActionResult> AddLoan(LoanViewModel loan)
            Interest = loan.Interest,
            Deduction = loan.Deduction,
            ReceivableAmount = loan.ReceivableAmount,
-           Status = "On Going",
+           Status = "Processed",
            DueDate = loan.DueDate,
            DateCreated = DateTime.Now
         };
