@@ -6,3 +6,22 @@ https://www.youtube.com/watch?v=7oVHAJ0AaX8
 
 
 / bayad if daily, weekly, monthly
+
+
+CREATE TABLE Loan(
+	Id int primary key identity(1,1),
+	Borrower int not null,
+	Amount int not null,
+	Term int not null,
+	Payment varchar(20) not null,
+	AmountPaid float not null,
+	InterestAmount float not null,
+	Total float not null,
+	Interest float not null,
+	Deduction float not null,
+	ReceivableAmount float not null,
+	Status varchar(50) not null,
+	DueDate date not null,
+	dateCreated dateTime
+	
+)

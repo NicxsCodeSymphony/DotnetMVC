@@ -30,12 +30,12 @@ else
             {
                 <tr>
                     <td>@loan.Id</td>
-                    <td>@loan.BorrowerName</td>
-                    <td>@loan.LoanPlan</td>
-                    <td>@loan.PrincipalLoan</td>
+                    <td>@loan.Borrower</td>
+                    <td>@loan.Amount</td>
+                    <td>@loan.Term</td>
                     <td>@loan.Interest</td>
-                    <td>@loan.Date</td>
-                    <td>@loan.Monthly</td>
+                    <td>@loan.DueDate</td>
+                    <td>@loan.Payment</td>
                     <td>@loan.Total</td>
                     <td>
                         <button class="btn btn-danger" onclick="deleteLoan(@loan.Id)">Delete</button>

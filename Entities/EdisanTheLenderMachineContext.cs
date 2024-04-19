@@ -66,20 +66,20 @@ public partial class EdisanTheLenderMachineContext : DbContext
 
         modelBuilder.Entity<Loan>(entity =>
         {
+            entity.HasKey(e => e.Id).HasName("PK__Loan__3214EC0793F41DA6");
+
             entity.ToTable("Loan");
 
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Borrower).HasColumnName("borrower")
-            .HasMaxLength(100)
-            .IsUnicode(false);
-            entity.Property(e => e.Date)
-                .HasColumnType("date")
-                .HasColumnName("date");
-            entity.Property(e => e.Interest).HasColumnName("interest");
-            entity.Property(e => e.LoanPlan).HasColumnName("loanPlan");
-            entity.Property(e => e.Monthly).HasColumnName("monthly");
-            entity.Property(e => e.PrincipalLoan).HasColumnName("principalLoan");
-            entity.Property(e => e.Total).HasColumnName("total");
+            entity.Property(e => e.DateCreated)
+                .HasColumnType("datetime")
+                .HasColumnName("dateCreated");
+            entity.Property(e => e.DueDate).HasColumnType("date");
+            entity.Property(e => e.Payment)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<UserType>(entity =>

@@ -221,15 +221,19 @@ public async Task<IActionResult> Loan(int id)
         where loan.Borrower == id
         select new LoanViewModel
         {
-            Id = loan.Id,
-            Borrower = loan.Borrower,
-            BorrowerName = clientInfo.FistName + " " + clientInfo.LastName, // Combine first name and last name for borrower name
-            LoanPlan = loan.LoanPlan,
-            PrincipalLoan = loan.PrincipalLoan,
+        Id = loan.Id,
+           Borrower = loan.Borrower,
+            Amount = loan.Amount,
+            Term = loan.Term,
+            Payment = loan.Payment,
+            AmountPaid = loan.AmountPaid,
+            InterestAmount = loan.InterestAmount,
+            Total = loan.Total,
             Interest = loan.Interest,
-            Date = loan.Date,
-            Monthly = loan.Monthly,
-            Total = loan.Total
+            Deduction = loan.Deduction,
+            ReceivableAmount = loan.ReceivableAmount,
+            DueDate = loan.DueDate,
+            DateCreated = loan.DateCreated
         }
     ).ToListAsync();
 
@@ -259,13 +263,18 @@ public async Task<IActionResult> AddLoan(LoanViewModel loan)
         // Map LoanViewModel to Loan entity
         var newLoan = new Loan
         {
-            Borrower = loan.Borrower,
-            LoanPlan = loan.LoanPlan,
-            PrincipalLoan = loan.PrincipalLoan,
-            Interest = loan.Interest,
-            Date = loan.Date,
-            Monthly = loan.Monthly,
-            Total = loan.Total
+           Borrower = loan.Borrower,
+           Amount = loan.Amount,
+           Term = loan.Term,
+           Payment = loan.Payment,
+           AmountPaid = loan.AmountPaid,
+           Total = loan.Total,
+           Interest = loan.Interest,
+           Deduction = loan.Deduction,
+           ReceivableAmount = loan.ReceivableAmount,
+           Status = "On Going",
+           DueDate = loan.DueDate,
+           DateCreated = DateTime.Now
         };
 
         // Add new loan to the context

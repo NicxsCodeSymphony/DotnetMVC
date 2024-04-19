@@ -4,17 +4,17 @@
 
 <form asp-action="AddLoan" method="post">
     <input type="hidden" asp-for="Borrower" />
-    
+
     <div class="form-group">
-        <label asp-for="LoanPlan" class="control-label"></label>
-        <input asp-for="LoanPlan" class="form-control" />
-        <span asp-validation-for="LoanPlan" class="text-danger"></span>
+        <label asp-for="Amount" class="control-label"></label>
+        <input asp-for="Amount" class="form-control" />
+        <span asp-validation-for="Amount" class="text-danger"></span>
     </div>
     
     <div class="form-group">
-        <label asp-for="PrincipalLoan" class="control-label"></label>
-        <input asp-for="PrincipalLoan" class="form-control" />
-        <span asp-validation-for="PrincipalLoan" class="text-danger"></span>
+        <label asp-for="Term" class="control-label"></label>
+        <input asp-for="Term" class="form-control" />
+        <span asp-validation-for="Term" class="text-danger"></span>
     </div>
     
     <div class="form-group">
@@ -24,21 +24,53 @@
     </div>
     
     <div class="form-group">
-        <label asp-for="Date" class="control-label"></label>
-        <input asp-for="Date" class="form-control" />
-        <span asp-validation-for="Date" class="text-danger"></span>
+        <label asp-for="DueDate" class="control-label"></label>
+        <input asp-for="DueDate" class="form-control" />
+        <span asp-validation-for="DueDate" class="text-danger"></span>
     </div>
     
     <div class="form-group">
-        <label asp-for="Monthly" class="control-label"></label>
-        <input asp-for="Monthly" class="form-control" />
-        <span asp-validation-for="Monthly" class="text-danger"></span>
+        <label asp-for="Payment" class="control-label"></label>
+        <input asp-for="Payment" class="form-control" />
+        <span asp-validation-for="Payment" class="text-danger"></span>
     </div>
     
     <div class="form-group">
         <label asp-for="Total" class="control-label"></label>
         <input asp-for="Total" class="form-control" />
         <span asp-validation-for="Total" class="text-danger"></span>
+    </div>
+
+    <!-- New fields added below -->
+    
+    <div class="form-group">
+        <label asp-for="AmountPaid" class="control-label"></label>
+        <input asp-for="AmountPaid" class="form-control" />
+        <span asp-validation-for="AmountPaid" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="InterestAmount" class="control-label"></label>
+        <input asp-for="InterestAmount" class="form-control" />
+        <span asp-validation-for="InterestAmount" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Deduction" class="control-label"></label>
+        <input asp-for="Deduction" class="form-control" />
+        <span asp-validation-for="Deduction" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="ReceivableAmount" class="control-label"></label>
+        <input asp-for="ReceivableAmount" class="form-control" />
+        <span asp-validation-for="ReceivableAmount" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Status" class="control-label"></label>
+        <input asp-for="Status" class="form-control" />
+        <span asp-validation-for="Status" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
