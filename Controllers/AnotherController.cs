@@ -213,37 +213,72 @@ namespace NICO.Controllers
             return (_context.ClientInfos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        public IActionResult Loan(int id)
+public async Task<IActionResult> Loan(int id)
+{
+    var loans = await (
+        from loan in _context.Loans
+        join clientInfo in _context.ClientInfos on loan.Borrower equals clientInfo.Id
+        where loan.Borrower == id
+        select new LoanViewModel
         {
-            var loans = _context.Loans.Where(l => l.Borrower == id).ToList();
-            if (loans.Count == 0)
-            {
-                ViewBag.Message = "No loan yet";
-            }
-            ViewBag.BorrowerId = id; // Pass the borrower ID to the view
-            return View(loans);
+            Id = loan.Id,
+            Borrower = loan.Borrower,
+            BorrowerName = clientInfo.FistName + " " + clientInfo.LastName, // Combine first name and last name for borrower name
+            LoanPlan = loan.LoanPlan,
+            PrincipalLoan = loan.PrincipalLoan,
+            Interest = loan.Interest,
+            Date = loan.Date,
+            Monthly = loan.Monthly,
+            Total = loan.Total
         }
+    ).ToListAsync();
 
-        public IActionResult AddLoan(int id)
-        {
-            var loan = new Loan { Borrower = id };
-            return View(loan);
-        }
+    if (loans.Count == 0)
+    {
+        ViewBag.Message = "No loan yet";
+    }
+
+    ViewBag.BorrowerId = id; // Pass the borrower ID to the view
+    return View(loans);
+}
+
+
+
+       public IActionResult AddLoan(int id)
+{
+    var loanViewModel = new LoanViewModel { Borrower = id };
+    return View(loanViewModel);
+}
+
 [HttpPost]
 [ValidateAntiForgeryToken]
-public async Task<IActionResult> AddLoan(Loan loan)
+public async Task<IActionResult> AddLoan(LoanViewModel loan)
 {
     if (ModelState.IsValid)
     {
-        // Remove the ID property to allow the database to generate it automatically
-        loan.Id = 0;
+        // Map LoanViewModel to Loan entity
+        var newLoan = new Loan
+        {
+            Borrower = loan.Borrower,
+            LoanPlan = loan.LoanPlan,
+            PrincipalLoan = loan.PrincipalLoan,
+            Interest = loan.Interest,
+            Date = loan.Date,
+            Monthly = loan.Monthly,
+            Total = loan.Total
+        };
 
-        _context.Add(loan);
+        // Add new loan to the context
+        _context.Add(newLoan);
         await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Loan), new { id = loan.Borrower });
+
+         return RedirectToAction(nameof(Loan), new { id = loan.Borrower });
     }
+    
+    // If ModelState is not valid, return the view with the same LoanViewModel
     return View(loan);
 }
+
 
 
 [HttpDelete]

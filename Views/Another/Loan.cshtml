@@ -1,4 +1,4 @@
-@model List<NICO.Entities.Loan>
+@model List<NICO.ViewModel.LoanViewModel>
 
 <h1>Loan Information</h1>
 <br>
@@ -30,7 +30,7 @@ else
             {
                 <tr>
                     <td>@loan.Id</td>
-                    <td>@loan.Borrower</td>
+                    <td>@loan.BorrowerName</td>
                     <td>@loan.LoanPlan</td>
                     <td>@loan.PrincipalLoan</td>
                     <td>@loan.Interest</td>
