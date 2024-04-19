@@ -1,0 +1,45 @@
+@model NICO.Entities.Loan
+
+<h1>Add Loan Information</h1>
+
+<form asp-action="AddLoan" method="post">
+    <input type="hidden" asp-for="Borrower" />
+    
+    <div class="form-group">
+        <label asp-for="LoanPlan" class="control-label"></label>
+        <input asp-for="LoanPlan" class="form-control" />
+        <span asp-validation-for="LoanPlan" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="PrincipalLoan" class="control-label"></label>
+        <input asp-for="PrincipalLoan" class="form-control" />
+        <span asp-validation-for="PrincipalLoan" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Interest" class="control-label"></label>
+        <input asp-for="Interest" class="form-control" />
+        <span asp-validation-for="Interest" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Date" class="control-label"></label>
+        <input asp-for="Date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Monthly" class="control-label"></label>
+        <input asp-for="Monthly" class="form-control" />
+        <span asp-validation-for="Monthly" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Total" class="control-label"></label>
+        <input asp-for="Total" class="form-control" />
+        <span asp-validation-for="Total" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

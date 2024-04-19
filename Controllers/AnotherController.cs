@@ -79,7 +79,7 @@ namespace NICO.Controllers
 
         public IActionResult AnotherCreate()
         {
-             ViewBag.UserTypes = _context.UserTypes.ToList();
+            ViewBag.UserTypes = _context.UserTypes.ToList();
             return View();
         }
 
@@ -125,11 +125,11 @@ namespace NICO.Controllers
             {
                 return NotFound();
             }
-              ViewBag.UserTypes = _context.UserTypes.ToList();
+            ViewBag.UserTypes = _context.UserTypes.ToList();
             return View(clientInfo);
         }
 
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int id, [Bind("Id,UserType,FistName,MiddleName,LastName,Address,ZipCode,Birthdate,Age,NameOfFather,NameOfMother,CivilStatus,Religion,Occupation")] ClientInfo clientInfo)
@@ -163,8 +163,9 @@ namespace NICO.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int id){
-            var Lending = _context.ClientInfos.Where( q => q.Id == id).FirstOrDefault();
+        public IActionResult Delete(int id)
+        {
+            var Lending = _context.ClientInfos.Where(q => q.Id == id).FirstOrDefault();
             _context.ClientInfos.Remove(Lending);
             _context.SaveChanges();
             return RedirectToAction("Index");
@@ -212,8 +213,56 @@ namespace NICO.Controllers
             return (_context.ClientInfos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        public IActionResult Loan(int id){
-            return View(id);
+        public IActionResult Loan(int id)
+        {
+            var loans = _context.Loans.Where(l => l.Borrower == id).ToList();
+            if (loans.Count == 0)
+            {
+                ViewBag.Message = "No loan yet";
+            }
+            ViewBag.BorrowerId = id; // Pass the borrower ID to the view
+            return View(loans);
         }
+
+        public IActionResult AddLoan(int id)
+        {
+            var loan = new Loan { Borrower = id };
+            return View(loan);
+        }
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> AddLoan(Loan loan)
+{
+    if (ModelState.IsValid)
+    {
+        // Remove the ID property to allow the database to generate it automatically
+        loan.Id = 0;
+
+        _context.Add(loan);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Loan), new { id = loan.Borrower });
+    }
+    return View(loan);
+}
+
+
+[HttpDelete]
+public async Task<IActionResult> DeleteLoan(int id)
+{
+    var loan = await _context.Loans.FindAsync(id);
+    if (loan == null)
+    {
+        return NotFound();
+    }
+
+    _context.Loans.Remove(loan);
+    await _context.SaveChangesAsync();
+
+    return RedirectToAction(nameof(Loan), new { id = loan.Borrower });
+}
+
+
+
+
     }
 }
