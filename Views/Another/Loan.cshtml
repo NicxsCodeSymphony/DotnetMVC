@@ -1,6 +1,7 @@
 @model List<NICO.ViewModel.LoanViewModel>
 
 <h1>Loan Information</h1>
+<h1>Hello, @ViewBag.BorrowerId</h1>
 <br>
 <a class="btn btn-primary" href="@Url.Action("AddLoan", "Another", new { id = ViewBag.BorrowerId })">Add Loan</a>
 <br><br>
@@ -16,12 +17,15 @@ else
             <tr>
                 <th>Loan ID</th>
                 <th>Borrower</th>
-                <th>Loan Plan</th>
-                <th>Principal Loan</th>
+                <th>Amount</th>
+                <th>Term</th>
+                <th>Payment</th>
                 <th>Interest</th>
-                <th>Date</th>
-                <th>Monthly Payment</th>
-                <th>Total Payment</th>
+                <th>Pay Amount</th>
+                <th>ReceivableAmount</th>
+                <th>Status</th>
+                <th>Due Date</th>
+                <th>Date Created</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -30,12 +34,16 @@ else
             {
                 <tr>
                     <td>@loan.Id</td>
-                    <td>@loan.Borrower</td>
+                    <td>@loan.BorrowerName</td>
                     <td>@loan.Amount</td>
                     <td>@loan.Term</td>
-                    <td>@loan.Interest</td>
-                    <td>@loan.DueDate</td>
                     <td>@loan.Payment</td>
+                    <td>@loan.Interest</td>
+                    <td>@loan.AmountPaid</td>
+                    <td>@loan.Payment</td>
+                    <td>@loan.Status</td>
+                    <td>@loan.DueDate</td>
+                    <td>@loan.DateCreated</td>
                     <td>@loan.Total</td>
                     <td>
                         <button class="btn btn-danger" onclick="deleteLoan(@loan.Id)">Delete</button>

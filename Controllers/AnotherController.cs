@@ -223,6 +223,7 @@ public async Task<IActionResult> Loan(int id)
         {
         Id = loan.Id,
            Borrower = loan.Borrower,
+           BorrowerName = clientInfo.FistName + " " + clientInfo.LastName,
             Amount = loan.Amount,
             Term = loan.Term,
             Payment = loan.Payment,
@@ -258,8 +259,6 @@ public async Task<IActionResult> Loan(int id)
 [ValidateAntiForgeryToken]
 public async Task<IActionResult> AddLoan(LoanViewModel loan)
 {
-    if (ModelState.IsValid)
-    {
         // Map LoanViewModel to Loan entity
         var newLoan = new Loan
         {
@@ -282,7 +281,7 @@ public async Task<IActionResult> AddLoan(LoanViewModel loan)
         await _context.SaveChangesAsync();
 
          return RedirectToAction(nameof(Loan), new { id = loan.Borrower });
-    }
+
     
     // If ModelState is not valid, return the view with the same LoanViewModel
     return View(loan);
