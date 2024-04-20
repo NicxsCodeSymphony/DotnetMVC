@@ -1,21 +1,20 @@
 @model List<NICO.ViewModel.LoanViewModel>
 
-    <style>
-        .card{width: 45vh;height: 40vh;padding: 30px;}
-        .card-heading{display: flex; justify-content: space-between;margin-bottom: 10px;}
-        .card-status{background-color: #eeee; padding: 5px; font-size: 14px; border-radius: 5px; font-weight: bold}
-        .money{margin-top: 20px;}
-        .next-payment{margin: 20px 0;}
-        .next-payment-heading{display: flex; justify-content: space-between;}
-    </style>
+<style>
+    .card { width: 45vh; height: 40vh; padding: 30px; }
+    .card-heading { display: flex; justify-content: space-between; margin-bottom: 10px; }
+    .card-status { background-color: #eeee; padding: 5px; font-size: 14px; border-radius: 5px; font-weight: bold; }
+    .money { margin-top: 20px; }
+    .next-payment { margin: 20px 0; }
+    .next-payment-heading { display: flex; justify-content: space-between; }
+</style>
 
-<h1>Hello, @ViewBag.BorrowerId</h1>
+<h1>Hello, @ViewBag.BorrowerName</h1>
 <hr>
 <p>Note: Kung Mangutang gali ka ayaw kalimot ug bayad ha</p>
 <br>
 <a class="btn btn-primary" href="@Url.Action("AddLoan", "Another", new { id = ViewBag.BorrowerId })">Add Loan</a>
 <br><br>
-
 
 @if (Model.Count == 0)
 {
@@ -31,16 +30,19 @@ else
                     <div></div>
                     <div class="card-status">@loan.Status</div>
                 </div>
-                <div class="card-info"><h5>@loan.BorrowerName</h5>
-                <p>#@loan.Id 1233 <span style="font-weight: bolder; padding:0 3px">&#183;</span> @loan.DateCreated</p>
+                <div class="card-info">
+                    <h5>@loan.BorrowerName</h5>
+                   <p>#@loan.Id 1233 <span style="font-weight: bolder; padding:0 3px">&#183;</span> @FormatDate(loan.DateCreated)</p>
                 </div>
-                <div class="money"><h1>₱@loan.ReceivableAmount / <span style="color: #c0c0c0">₱@loan.Amount</span></h1></div>
+                <div class="money">
+                    <h1>₱@loan.AmountPaid / <span style="color: #c0c0c0">₱@loan.ReceivableAmount</span></h1>
+                </div>
                 <div class="next-payment">
                     <div class="next-payment-heading">
                         <div><h5>Next Payment</h5></div>
-                        <div class="next-payment-day">@loan.DueDate</div>
+                    <div class="next-payment-day">@FormatDueDate(loan.DueDate)</div>
                     </div>
-                    <h6>@loan.AmountPaid <span style="font-weight: bolder; padding:0 3px">&#183;</span> @loan.DueDate</h6>
+                    <h6>@loan.AmountPaid <span style="font-weight: bolder; padding:0 3px">&#183;</span> @FormatDate(loan.DueDate)</h6>
                 </div>
                 <button class="btn btn-danger" onclick="deleteLoan(@loan.Id)">Delete</button>
             </div>
@@ -63,5 +65,61 @@ else
                 });
             }
         }
+
+        });
     </script>
+}
+
+@functions {
+    public string FormatDate(DateTime? date)
+{
+    if (date.HasValue)
+    {
+        return date.Value.ToString("MMM dd, yyyy");
+    }
+    else
+    {
+        return string.Empty; // Or any default value you prefer
+    }
+}
+
+public string FormatDueDate(DateTime? dueDate)
+    {
+        if (dueDate.HasValue)
+        {
+            DateTime currentDate = DateTime.Today;
+            DateTime dateValue = dueDate.Value.Date;
+
+            if (dateValue == currentDate)
+            {
+                return "Today";
+            }
+            else if (dateValue == currentDate.AddDays(1))
+            {
+                return "Tomorrow";
+            }
+            else if (dateValue > currentDate && dateValue <= currentDate.AddDays(7))
+            {
+                return "Next Week";
+            }
+            else if (dateValue > currentDate && dateValue <= currentDate.AddMonths(1))
+            {
+                return "Next Month";
+            }
+            else if (dateValue > currentDate && dateValue <= currentDate.AddYears(1))
+            {
+                return "Next Year";
+            }
+            else
+            {
+                return dateValue.ToString("MMM dd, yyyy");
+            }
+        }
+        else
+        {
+            return string.Empty; // Or any default value you prefer
+        }
+    }
+
+
 }

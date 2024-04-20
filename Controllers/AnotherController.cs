@@ -215,15 +215,18 @@ namespace NICO.Controllers
 
 public async Task<IActionResult> Loan(int id)
 {
+    var borrower = await _context.ClientInfos.Where(c => c.Id == id)
+                        .Select(c => c.FistName + " " + c.LastName)
+                        .FirstOrDefaultAsync();
+
     var loans = await (
         from loan in _context.Loans
-        join clientInfo in _context.ClientInfos on loan.Borrower equals clientInfo.Id
         where loan.Borrower == id
         select new LoanViewModel
         {
-        Id = loan.Id,
-           Borrower = loan.Borrower,
-           BorrowerName = clientInfo.FistName + " " + clientInfo.LastName,
+            Id = loan.Id,
+            Borrower = loan.Borrower,
+            BorrowerName = borrower,
             Amount = loan.Amount,
             Term = loan.Term,
             Payment = loan.Payment,
@@ -244,9 +247,11 @@ public async Task<IActionResult> Loan(int id)
         ViewBag.Message = "No loan yet";
     }
 
+    ViewBag.BorrowerName = borrower;
     ViewBag.BorrowerId = id; // Pass the borrower ID to the view
     return View(loans);
 }
+
 
 
 
