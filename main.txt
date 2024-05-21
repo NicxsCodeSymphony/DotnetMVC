@@ -1,5 +1,4 @@
-dotnet ef dbcontext scaffold "Server=localhost;Database=Library;TrustServerCertificate=true;Trusted_Con
-nection=True" Microsoft.EntityFrameworkCore.SqlServer -o Entities -f
+dotnet ef dbcontext scaffold "Server=localhost\EDISANEXPRESS;Database=Edisan;TrustServerCertificate=true;Trusted_Connection=True" Microsoft.EntityFrameworkCore.SqlServer -o Entities -f
 
 
 https://www.youtube.com/watch?v=7oVHAJ0AaX8
